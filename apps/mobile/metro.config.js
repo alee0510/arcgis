@@ -15,7 +15,18 @@ const config = {
       ),
     },
     sourceExts: ['jsx', 'js', 'ts', 'tsx', 'cjs', 'json'],
-    assetExts: ['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg'],
+    assetExts: [
+      'png',
+      'jpg',
+      'jpeg',
+      'gif',
+      'webp',
+      'svg',
+      'ttf',
+      'otf',
+      'woff',
+      'woff2',
+    ],
   },
 };
 
