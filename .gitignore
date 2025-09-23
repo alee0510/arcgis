@@ -1,0 +1,49 @@
+# Node
+node_modules/
+.pnpm-store/
+.env*
+
+# pnpm
+pnpm-debug.log*
+
+# macOS
+.DS_Store
+
+# React Native
+*.log
+*.lock
+*.tmp
+*.swp
+*.swo
+*.idea/
+*.vscode/
+coverage/
+expo/
+web-build/
+
+# Android
+apps/*/android/.gradle/
+apps/*/android/app/build/
+apps/*/android/build/
+apps/*/android/local.properties
+apps/*/android/gradle/wrapper/gradle-wrapper.jar
+
+# iOS
+apps/*/ios/Pods/
+apps/*/ios/build/
+apps/*/ios/*.xcuserstate
+apps/*/ios/*.xcworkspace
+apps/*/ios/*.xcodeproj/project.xcworkspace/
+apps/*/ios/*.xcodeproj/xcuserdata/
+
+# Turbo modules/packages
+packages/*/dist/
+packages/*/build/
+
+# Misc
+*.keystore
+*.jks
+*.pem
+*.crt
+*.p12
+*.key
