@@ -1,19 +1,16 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
-import LoginScreen from './src/screens/auth/LoginScreen';
-import HomeScreen from './src/screens/MainScreen';
-import ProfileScreen from './src/screens/ProfileScreen';
+import LoginScreen from '@mobile/screens/auth/LoginScreen';
+import HomeScreen from '@mobile/screens/MainScreen';
+import ProfileScreen from '@mobile/screens/ProfileScreen';
 
 function App(): React.JSX.Element {
-  return <ProfileScreen />;
+  return (
+    <SafeAreaProvider>
+      <ProfileScreen />
+    </SafeAreaProvider>
+  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});
 
 export default App;

@@ -8,6 +8,9 @@ const config = {
     path.resolve(__dirname, '../../'),
   ],
   resolver: {
+    alias: {
+      '@mobile': path.resolve(__dirname, 'src'),
+    },
     extraNodeModules: {
       'react-native': path.resolve(
         __dirname,
