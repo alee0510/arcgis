@@ -1,14 +1,13 @@
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
-import LoginScreen from '@mobile/screens/auth/LoginScreen';
-import HomeScreen from '@mobile/screens/MainScreen';
-import ProfileScreen from '@mobile/screens/ProfileScreen';
+// @Navigation
+import RootNavigation from '@mobile/navigations/RootNavigation';
 
 function App(): React.JSX.Element {
   return (
     <SafeAreaProvider>
-      <ProfileScreen />
+      <RootNavigation />
     </SafeAreaProvider>
   );
 }
