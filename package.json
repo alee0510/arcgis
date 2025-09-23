@@ -1,0 +1,13 @@
+{
+  "name": "arcgis",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {},
+  "keywords": [
+    "react-native",
+    "arcgis"
+  ],
+  "author": "alee@otechq.com",
+  "license": "ISC",
+  "packageManager": "pnpm@10.15.1"
+}
