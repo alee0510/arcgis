@@ -4,10 +4,12 @@
   "description": "",
   "scripts": {
     "clean": "find ./ -name 'node_modules' -type d -exec rm -rf {} +",
-    "clean:android": "find ./apps/mobile/android -name 'build' -type d -exec rm -rf {} + 2>/dev/null || true && find ./apps/mobile/android -name '.kotlin' -type d -exec rm -rf {} + 2>/dev/null || true && find ./apps/mobile/android -name '.gradle' -type d -exec rm -rf {} + 2>/dev/null || true && find ./apps/mobile/android -name '.cxx' -type d -exec rm -rf {} + 2>/dev/null || true",
-    "clean:gradle": "cd apps/mobile/android && ./gradlew clean && cd ../../../",
-    "mobile:start": "pnpm --filter @arcgis/mobile run start",
-    "mobile:android-dev": "pnpm --filter @arcgis/mobile run android"
+    "clean:mobile:android": "find ./apps/mobile/android -name 'build' -type d -exec rm -rf {} + 2>/dev/null || true && find ./apps/mobile/android -name '.kotlin' -type d -exec rm -rf {} + 2>/dev/null || true && find ./apps/mobile/android -name '.gradle' -type d -exec rm -rf {} + 2>/dev/null || true && find ./apps/mobile/android -name '.cxx' -type d -exec rm -rf {} + 2>/dev/null || true",
+    "clean:mobile:gradle": "cd apps/mobile/android && ./gradlew clean && cd ../../../",
+    "clean:packages:android": "find ./packages -name 'build' -type d -exec rm -rf {} + 2>/dev/null || true && find ./packages -name '.kotlin' -type d -exec rm -rf {} + 2>/dev/null || true && find ./packages -name '.gradle' -type d -exec rm -rf {} + 2>/dev/null || true && find ./packages -name '.cxx' -type d -exec rm -rf {} + 2>/dev/null || true",
+    "mobile:start:metro": "pnpm --filter @arcgis/mobile run start",
+    "mobile:start:android-dev": "pnpm --filter @arcgis/mobile run android",
+    "mobile:android:codegen": "cd apps/mobile/android && ./gradlew generateCodegenArtifactsFromSchema && cd ../../../"
   },
   "keywords": [
     "react-native",

@@ -145,7 +145,7 @@
     "type": "modules",
     "jsSrcsDir": "src",
     "android": {
-      "javaPackageName": "com.location"
+      "javaPackageName": "com.locationspec"
     }
   },
   "create-react-native-library": {
