@@ -1,0 +1,117 @@
+buildscript {
+  ext.getExtOrDefault = {name ->
+    if (rootProject.ext.has(name)) {
+      return rootProject.ext.get(name)
+    } else if (project.hasProperty('Location_' + name)) {
+      return project.property('Location_' + name)
+    } else {
+      // Fallback values for standalone builds
+      switch(name) {
+        case 'compileSdkVersion': return 35
+        case 'targetSdkVersion': return 35
+        case 'minSdkVersion': return 24
+        case 'buildToolsVersion': return '35.0.0'
+        case 'kotlinVersion': return '2.0.21'
+        default: return null
+      }
+    }
+  }
+
+  repositories {
+    google()
+    mavenCentral()
+  }
+
+  dependencies {
+    classpath "com.android.tools.build:gradle:8.7.2"
+    // noinspection DifferentKotlinGradleVersion
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${getExtOrDefault('kotlinVersion')}"
+  }
+}
+
+
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+
+apply plugin: "com.facebook.react"
+
+def getExtOrIntegerDefault(name) {
+  if (rootProject.ext.has(name)) {
+    return rootProject.ext.get(name)
+  } else if (project.hasProperty("Location_" + name)) {
+    return (project.properties["Location_" + name]).toInteger()
+  } else {
+    // Fallback values for standalone builds
+    switch(name) {
+      case 'compileSdkVersion': return 35
+      case 'targetSdkVersion': return 35
+      case 'minSdkVersion': return 24
+      default: return 35 // Default fallback
+    }
+  }
+}
+
+android {
+  namespace "com.location"
+
+  compileSdkVersion getExtOrIntegerDefault("compileSdkVersion")
+
+  defaultConfig {
+    minSdkVersion getExtOrIntegerDefault("minSdkVersion")
+    targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
+  }
+
+  buildFeatures {
+    buildConfig true
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+    }
+    debug {
+      minifyEnabled false
+      // Development build for better IntelliSense
+      consumerProguardFiles 'proguard-rules.pro'
+    }
+  }
+
+  lintOptions {
+    disable "GradleCompatible"
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  sourceSets {
+    main {
+      java.srcDirs += [
+        "generated/java",
+        "generated/jni"
+      ]
+    }
+  }
+}
+
+repositories {
+  mavenCentral()
+  google()
+}
+
+def kotlin_version = getExtOrDefault("kotlinVersion")
+
+dependencies {
+  implementation "com.facebook.react:react-android"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+  // Additional React Native dependencies for better IntelliSense
+  compileOnly "com.facebook.react:react-native:+"  // For development IntelliSense
+
+  // Use compatible versions with React Native
+  compileOnly "androidx.annotation:annotation:1.6.0"  // Compatible version
+
+  // Google Play Services for location
+  implementation "com.google.android.gms:play-services-location:21.0.1"
+}

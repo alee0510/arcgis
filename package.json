@@ -4,10 +4,13 @@
   "description": "",
   "scripts": {
     "clean": "find ./ -name 'node_modules' -type d -exec rm -rf {} +",
-    "clean:android": "find ./apps/mobile/android -name 'build' -type d -exec rm -rf {} + 2>/dev/null || true && find ./apps/mobile/android -name '.kotlin' -type d -exec rm -rf {} + 2>/dev/null || true && find ./apps/mobile/android -name '.gradle' -type d -exec rm -rf {} + 2>/dev/null || true && find ./apps/mobile/android -name '.cxx' -type d -exec rm -rf {} + 2>/dev/null || true",
-    "clean:gradle": "cd apps/mobile/android && ./gradlew clean && cd ../../../",
-    "mobile:start": "pnpm --filter @arcgis/mobile run start",
-    "mobile:android-dev": "pnpm --filter @arcgis/mobile run android"
+    "clean:mobile:android": "find ./apps/mobile/android -name 'build' -type d -exec rm -rf {} + 2>/dev/null || true && find ./apps/mobile/android -name '.kotlin' -type d -exec rm -rf {} + 2>/dev/null || true && find ./apps/mobile/android -name '.gradle' -type d -exec rm -rf {} + 2>/dev/null || true && find ./apps/mobile/android -name '.cxx' -type d -exec rm -rf {} + 2>/dev/null || true",
+    "clean:mobile:gradle": "cd apps/mobile/android && ./gradlew clean && cd ../../../",
+    "clean:package:location": "pnpm --filter @arcgis/react-native-location run clean",
+    "mobile:start:metro": "pnpm --filter @arcgis/mobile run start",
+    "mobile:start:android-dev": "pnpm --filter @arcgis/mobile run android",
+    "mobile:android:codegen": "cd apps/mobile/android && ./gradlew generateCodegenArtifactsFromSchema && cd ../../../",
+    "package:location:prepare": "pnpm --filter @arcgis/react-native-location run prepare"
   },
   "keywords": [
     "react-native",
@@ -15,5 +18,9 @@
   ],
   "author": "alee@otechq.com",
   "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=10.15.1"
+  },
   "packageManager": "pnpm@10.15.1"
 }
