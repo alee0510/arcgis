@@ -1,8 +1,9 @@
-import * as z from 'zod';
-import {createUser, getUserById, getUsers} from '@mobile/services/auth';
-import {useAuth} from '@mobile/store/auth';
-import {LoginSchema, RegisterSchema} from '@mobile/utils/auth-validation';
 import {useMutation, useQuery} from '@tanstack/react-query';
+import {useAuth} from '@mobile/store/auth';
+import {createUser, getUserById, getUsers} from '@mobile/services/auth';
+import {formatZodError} from '@mobile/utils/error-formatter';
+import {LoginSchema, RegisterSchema} from '@mobile/utils/auth-validation';
+
 import type {User} from '@mobile/types/auth';
 
 export const useAuthLogin = () => {
@@ -10,7 +11,11 @@ export const useAuthLogin = () => {
   return useMutation({
     mutationFn: async (user: Pick<User, 'email' | 'password'>) => {
       // do input validation
-      await LoginSchema.parseAsync(user);
+      const validationResult = LoginSchema.safeParse(user);
+      if (!validationResult.success) {
+        const errorMessages = formatZodError(validationResult.error);
+        throw new Error(errorMessages);
+      }
 
       // check if user exists (?email&password), throw error if not
       const users = await getUsers({
@@ -33,10 +38,6 @@ export const useAuthLogin = () => {
       setUser(data);
     },
     onError: error => {
-      if (error instanceof z.ZodError) {
-        console.log(z.treeifyError(error));
-        return;
-      }
       console.log(error);
     },
   });
@@ -55,8 +56,11 @@ export const useAuthRegister = () => {
       }
 
       // do input validation
-      // remove confirmPassword from user
-      const validatedUser = await RegisterSchema.parseAsync(rest);
+      const validationResult = RegisterSchema.safeParse(rest);
+      if (!validationResult.success) {
+        const errorMessages = formatZodError(validationResult.error);
+        throw new Error(errorMessages);
+      }
 
       // check if user exists (?email), throw error if so
       const users = await getUsers({
@@ -68,7 +72,7 @@ export const useAuthRegister = () => {
 
       // if all good, create user
       const newUser = await createUser({
-        ...validatedUser,
+        ...validationResult.data,
         role: 'user',
       });
       return {
@@ -82,10 +86,6 @@ export const useAuthRegister = () => {
       setUser(data);
     },
     onError: error => {
-      if (error instanceof z.ZodError) {
-        console.log(z.treeifyError(error));
-        return;
-      }
       console.log(error);
     },
   });
