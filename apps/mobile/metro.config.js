@@ -8,6 +8,9 @@ const config = {
     path.resolve(__dirname, '../../'),
   ],
   resolver: {
+    alias: {
+      '@mobile': path.resolve(__dirname, 'src'),
+    },
     extraNodeModules: {
       'react-native': path.resolve(
         __dirname,
@@ -15,7 +18,18 @@ const config = {
       ),
     },
     sourceExts: ['jsx', 'js', 'ts', 'tsx', 'cjs', 'json'],
-    assetExts: ['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg'],
+    assetExts: [
+      'png',
+      'jpg',
+      'jpeg',
+      'gif',
+      'webp',
+      'svg',
+      'ttf',
+      'otf',
+      'woff',
+      'woff2',
+    ],
   },
 };
 

@@ -1,0 +1,28 @@
+{
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/android/build/**": true,
+    "**/android/.gradle/**": true,
+    "**/android/app/build/**": true,
+    "**/android/app/.cxx/**": true,
+    "**/ios/build/**": true,
+    "**/ios/Pods/**": true,
+    "**/ios/DerivedData/**": true,
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/build/**": true,
+    "**/dist/**": true,
+    "**/*.log": true,
+    "**/.pnpm-store/**": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/android/build": true,
+    "**/android/.gradle": true,
+    "**/android/app/build": true,
+    "**/ios/build": true,
+    "**/ios/Pods": true,
+    "**/build": true,
+    "**/dist": true
+  }
+}

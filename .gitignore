@@ -16,7 +16,8 @@ pnpm-debug.log*
 *.swp
 *.swo
 *.idea/
-*.vscode/
+.vscode/workspace.code-workspace
+.vscode/*.code-workspace
 coverage/
 expo/
 web-build/
