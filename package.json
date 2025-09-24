@@ -18,5 +18,9 @@
   ],
   "author": "alee@otechq.com",
   "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=10.15.1"
+  },
   "packageManager": "pnpm@10.15.1"
 }
