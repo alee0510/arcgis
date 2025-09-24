@@ -43,14 +43,19 @@
   // Exclude folders from Java project detection
   "java.import.exclusions": [
     "**/packages/react-native-location/android",
+    "**/packages/react-native-location/android/**",
     "**/node_modules/**",
     "**/build/**",
     "**/.gradle/**"
   ],
 
+  // Disable Gradle project detection for this specific folder
+  "java.import.gradle.enabled": false,
+
   // Additional Java workspace exclusions
   "java.project.resourceFilters": [
-    "packages/react-native-location/android/.settings/**"
+    "packages/react-native-location/android/.settings/**",
+    "packages/react-native-location/android/**"
   ],
 
   // Kotlin Language Server Settings
