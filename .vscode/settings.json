@@ -3,6 +3,7 @@
     "**/node_modules/**": true,
     "**/android/build/**": true,
     "**/android/.gradle/**": true,
+    "**/android/.settings/**": true,
     "**/android/app/build/**": true,
     "**/android/app/.cxx/**": true,
     "**/ios/build/**": true,
@@ -19,6 +20,7 @@
     "**/node_modules": true,
     "**/android/build": true,
     "**/android/.gradle": true,
+    "**/android/.settings": true,
     "**/android/app/build": true,
     "**/ios/build": true,
     "**/ios/Pods": true,
@@ -36,6 +38,19 @@
   "java.project.sourcePaths": [
     "packages/react-native-location/android/src/main/java",
     "apps/mobile/android/app/src/main/java"
+  ],
+
+  // Exclude folders from Java project detection
+  "java.import.exclusions": [
+    "**/packages/react-native-location/android",
+    "**/node_modules/**",
+    "**/build/**",
+    "**/.gradle/**"
+  ],
+
+  // Additional Java workspace exclusions
+  "java.project.resourceFilters": [
+    "packages/react-native-location/android/.settings/**"
   ],
 
   // Kotlin Language Server Settings
