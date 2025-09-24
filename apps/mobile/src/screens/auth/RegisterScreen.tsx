@@ -1,6 +1,12 @@
 import {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Button, HelperText, TextInput, Appbar} from 'react-native-paper';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {useAuthRegister} from '@mobile/hooks/useAuth';
+
+// @Types
+type NavigationProps = StackNavigationProp<any, 'Register'>;
 
 export function RegisterScreen() {
   const [visible, setVisible] = useState(false);
@@ -8,11 +14,16 @@ export function RegisterScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const {mutate: register, error, isPending} = useAuthRegister();
+  const navigation = useNavigation<NavigationProps>();
 
   return (
     <View style={styles.container}>
       <Appbar>
-        <Appbar.BackAction onPress={() => {}} />
+        <Appbar.BackAction
+          onPress={() => navigation.goBack()}
+          disabled={isPending}
+        />
         <Appbar.Content title="Register" />
       </Appbar>
       <View style={styles.content}>
@@ -24,7 +35,7 @@ export function RegisterScreen() {
           onChangeText={text => {
             setUsername(text);
           }}
-          disabled={false}
+          disabled={isPending}
         />
         <TextInput
           label="Email"
@@ -34,7 +45,7 @@ export function RegisterScreen() {
           onChangeText={text => {
             setEmail(text);
           }}
-          disabled={false}
+          disabled={isPending}
         />
         <TextInput
           label="Password"
@@ -44,7 +55,7 @@ export function RegisterScreen() {
           onChangeText={text => {
             setPassword(text);
           }}
-          disabled={false}
+          disabled={isPending}
           right={
             <TextInput.Icon
               icon={visible ? 'eye-off' : 'eye'}
@@ -60,7 +71,7 @@ export function RegisterScreen() {
           onChangeText={text => {
             setConfirmPassword(text);
           }}
-          disabled={false}
+          disabled={isPending}
           right={
             <TextInput.Icon
               icon={visible ? 'eye-off' : 'eye'}
@@ -68,15 +79,17 @@ export function RegisterScreen() {
             />
           }
         />
-        <HelperText type="error" visible={false}>
-          Passwords do not match
+        <HelperText type="error" visible={!!error}>
+          {error?.message}
         </HelperText>
         <Button
           mode="contained"
           icon="login"
-          onPress={() => {}}
-          loading={false}
-          disabled={false}>
+          onPress={() => {
+            register({username, email, password, confirmPassword});
+          }}
+          loading={isPending}
+          disabled={isPending}>
           Register
         </Button>
       </View>

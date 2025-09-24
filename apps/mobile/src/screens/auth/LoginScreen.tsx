@@ -1,11 +1,20 @@
 import {useState} from 'react';
 import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {Button, HelperText, Text, TextInput} from 'react-native-paper';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {useNavigation} from '@react-navigation/native';
+import {useAuthLogin} from '@mobile/hooks/useAuth';
+import type {AuthStackParamList} from '@mobile/types/navigation';
+
+// @Types
+type NavigationProps = StackNavigationProp<AuthStackParamList, 'Login'>;
 
 export function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [visible, setVisible] = useState(false);
+  const {mutate: login, error, isPending} = useAuthLogin();
+  const navigation = useNavigation<NavigationProps>();
 
   return (
     <View style={styles.container}>
@@ -19,7 +28,7 @@ export function LoginScreen() {
         onChangeText={text => {
           setEmail(text);
         }}
-        disabled={false}
+        disabled={isPending}
       />
       <TextInput
         label="Password"
@@ -29,7 +38,7 @@ export function LoginScreen() {
         onChangeText={text => {
           setPassword(text);
         }}
-        disabled={false}
+        disabled={isPending}
         right={
           <TextInput.Icon
             icon={visible ? 'eye-off' : 'eye'}
@@ -37,20 +46,26 @@ export function LoginScreen() {
           />
         }
       />
-      <HelperText type="error" visible={false}>
-        Invalid email or password
+      <HelperText type="error" visible={!!error}>
+        {error?.message}
       </HelperText>
       <Button
         mode="contained"
         icon="login"
-        onPress={() => {}}
-        loading={false}
-        disabled={false}>
+        onPress={() => {
+          login({email, password});
+        }}
+        loading={isPending}
+        disabled={isPending}>
         Login
       </Button>
       <View style={styles.linkContainer}>
         <Text style={styles.text}>Don't have an account?</Text>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Register');
+          }}
+          disabled={isPending}>
           <Text style={styles.link}> Register</Text>
         </TouchableOpacity>
       </View>
