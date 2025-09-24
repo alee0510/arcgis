@@ -43,6 +43,11 @@ android {
     release {
       minifyEnabled false
     }
+    debug {
+      minifyEnabled false
+      // Development build for better IntelliSense
+      consumerProguardFiles 'proguard-rules.pro'
+    }
   }
 
   lintOptions {
@@ -74,4 +79,13 @@ def kotlin_version = getExtOrDefault("kotlinVersion")
 dependencies {
   implementation "com.facebook.react:react-android"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+  // Additional React Native dependencies for better IntelliSense
+  compileOnly "com.facebook.react:react-native:+"  // For development IntelliSense
+
+  // Use compatible versions with React Native
+  compileOnly "androidx.annotation:annotation:1.6.0"  // Compatible version
+
+  // Google Play Services for location
+  implementation "com.google.android.gms:play-services-location:21.0.1"
 }
