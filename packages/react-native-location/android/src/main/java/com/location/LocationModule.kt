@@ -11,8 +11,9 @@ import com.google.android.gms.location.*
 import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.PermissionListener
 import com.facebook.react.modules.core.PermissionAwareActivity
+import com.locationspec.NativeLocationModuleSpec
 
-class LocationModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext), ActivityEventListener {
+class LocationModule(reactContext: ReactApplicationContext) : NativeLocationModuleSpec(reactContext), ActivityEventListener {
   // React application context
   private val context: ReactApplicationContext = reactContext
   private var permissionPromise: Promise? = null
@@ -21,7 +22,6 @@ class LocationModule(reactContext: ReactApplicationContext) : ReactContextBaseJa
 
   // Constants for location permissions and request codes
   companion object {
-    const val NAME = "LocationModule"
     private const val REQUEST_CODE_LOCATION = 1001
     private val REQUIRED_PERMISSIONS = arrayOf(
       Manifest.permission.ACCESS_FINE_LOCATION,
@@ -35,12 +35,9 @@ class LocationModule(reactContext: ReactApplicationContext) : ReactContextBaseJa
     fusedLocationClient = LocationServices.getFusedLocationProviderClient(reactContext)
   }
 
-  // Module name for React Native
-  override fun getName(): String = NAME
-
   // Method to request location permissions
   @ReactMethod
-  fun requestLocationPermission(promise: Promise) {
+  override fun requestLocationPermission(promise: Promise) {
     val activity = currentActivity as? PermissionAwareActivity
 
     if (activity == null) {
@@ -63,7 +60,7 @@ class LocationModule(reactContext: ReactApplicationContext) : ReactContextBaseJa
 
   // Method to check if location permission is granted
   @ReactMethod
-  fun hasLocationPermission(promise: Promise) {
+  override fun hasLocationPermission(promise: Promise) {
     val hasPermission = REQUIRED_PERMISSIONS.all { permission ->
       ActivityCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
     }
@@ -73,7 +70,7 @@ class LocationModule(reactContext: ReactApplicationContext) : ReactContextBaseJa
   // Method to start location updates
   @ReactMethod
   @SuppressLint("MissingPermission")
-  fun getCurrentLocation(promise: Promise) {
+  override fun getCurrentLocation(promise: Promise) {
     if (!hasLocationPermission()) {
       promise.reject("PERMISSION_DENIED", "Location permission not granted")
       return

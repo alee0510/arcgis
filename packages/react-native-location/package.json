@@ -137,7 +137,8 @@
         {
           "project": "tsconfig.build.json"
         }
-      ]
+      ],
+      "codegen"
     ]
   },
   "codegenConfig": {
@@ -146,7 +147,12 @@
     "jsSrcsDir": "src",
     "android": {
       "javaPackageName": "com.locationspec"
-    }
+    },
+    "outputDir": {
+      "ios": "ios/generated",
+      "android": "android/build/generated/source/codegen"
+    },
+    "includesGeneratedCode": true
   },
   "create-react-native-library": {
     "languages": "kotlin-objc",
