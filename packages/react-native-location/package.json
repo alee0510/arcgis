@@ -1,5 +1,5 @@
 {
-  "name": "react-native-location",
+  "name": "@arcgis/react-native-location",
   "version": "0.1.0",
   "description": "A React Native TurboModule for handling location permission and its data",
   "main": "./lib/module/index.js",
