@@ -1,4 +1,11 @@
-import * as Config from '@env';
+import {
+  API_BASE_URL,
+  API_TIMEOUT,
+  APP_NAME,
+  APP_VERSION,
+  DEBUG_MODE,
+  NODE_ENV,
+} from '@env';
 import * as z from 'zod';
 
 export const EnvSchema = z.object({
@@ -15,6 +22,13 @@ export const EnvSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']),
 });
 
-export const env = EnvSchema.parse(Config);
+export const env = EnvSchema.parse({
+  API_BASE_URL,
+  API_TIMEOUT,
+  APP_NAME,
+  APP_VERSION,
+  DEBUG_MODE,
+  NODE_ENV,
+});
 
 export type Env = z.infer<typeof EnvSchema>;
