@@ -20,18 +20,6 @@ export interface Spec extends TurboModule {
 
   // Get current location once
   getCurrentLocation(): Promise<LocationResult>;
-
-  // Start watching location changes
-  startLocationUpdates(distanceFilter: number): Promise<void>;
-
-  // Stop watching location changes
-  stopLocationUpdates(): Promise<void>;
-
-  // Add event listener for location updates
-  addListener(eventName: string): void;
-
-  // Remove event listeners
-  removeListeners(count: number): void;
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>('LocationModule');
