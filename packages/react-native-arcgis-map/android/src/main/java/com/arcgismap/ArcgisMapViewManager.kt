@@ -1,6 +1,7 @@
 package com.arcgismap
 
-import android.graphics.Color
+import android.util.Log
+import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
@@ -10,13 +11,8 @@ import com.facebook.react.viewmanagers.ArcgisMapViewManagerInterface
 import com.facebook.react.viewmanagers.ArcgisMapViewManagerDelegate
 
 @ReactModule(name = ArcgisMapViewManager.NAME)
-class ArcgisMapViewManager : SimpleViewManager<ArcgisMapView>(),
-  ArcgisMapViewManagerInterface<ArcgisMapView> {
-  private val mDelegate: ViewManagerDelegate<ArcgisMapView>
-
-  init {
-    mDelegate = ArcgisMapViewManagerDelegate(this)
-  }
+class ArcgisMapViewManager(context: ReactApplicationContext) : SimpleViewManager<ArcgisMapView>(), ArcgisMapViewManagerInterface<ArcgisMapView> {
+  private val mDelegate: ViewManagerDelegate<ArcgisMapView> = ArcgisMapViewManagerDelegate(this)
 
   override fun getDelegate(): ViewManagerDelegate<ArcgisMapView>? {
     return mDelegate
@@ -30,9 +26,13 @@ class ArcgisMapViewManager : SimpleViewManager<ArcgisMapView>(),
     return ArcgisMapView(context)
   }
 
-  @ReactProp(name = "color")
-  override fun setColor(view: ArcgisMapView?, color: String?) {
-    view?.setBackgroundColor(Color.parseColor(color))
+  @ReactProp(name = "mapId")
+  override fun setMapId(view: ArcgisMapView, value: String?) {
+    if (value == null || value.isEmpty()) {
+      Log.e(NAME, "setMapId: mapId is null or empty")
+      return
+    }
+    view.mapId = value
   }
 
   companion object {
