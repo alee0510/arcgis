@@ -23,10 +23,10 @@ class LocationPackage : BaseReactPackage() {
       moduleInfos[NativeLocationModuleSpec.NAME] = ReactModuleInfo(
         NativeLocationModuleSpec.NAME,
         NativeLocationModuleSpec.NAME,
-        false,  // canOverrideExistingModule
-        false,  // needsEagerInit
-        false,  // isCxxModule
-        true // isTurboModule
+        canOverrideExistingModule = false,  // canOverrideExistingModule
+        needsEagerInit = false,  // needsEagerInit
+        isCxxModule = false,  // isCxxModule
+        isTurboModule = true // isTurboModule
       )
       moduleInfos
     }
