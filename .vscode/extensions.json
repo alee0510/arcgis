@@ -1,14 +1,39 @@
 {
   "recommendations": [
+    // React Native Development
     "ms-vscode.vscode-typescript-next",
-    "bradlc.vscode-tailwindcss",
     "esbenp.prettier-vscode",
-    "ms-vscode.vscode-eslint",
-    "ms-vscode.vscode-json",
+    "dbaeumer.vscode-eslint",
     "formulahendry.auto-rename-tag",
+    "formulahendry.auto-close-tag",
     "christian-kohler.path-intellisense",
-    "ms-vscode.vscode-react-native",
-    "msjsdiag.vscode-react-native-tools",
-    "ms-vscode.vscode-android-studio-project-converter"
+    "msjsdiag.vscode-react-native",
+    "wix.vscode-import-cost",
+
+    // Java Development & Debugging
+    "redhat.java",
+    "vscjava.vscode-java-pack",
+    "vscjava.vscode-java-dependency",
+    "vscjava.vscode-java-test",
+    "vscjava.vscode-java-debug",
+    "vscjava.vscode-maven",
+    "vscjava.vscode-gradle",
+
+    // Kotlin Development
+    "mathiasfrohlich.kotlin",
+    "fwcd.kotlin",
+
+    // Android Development & Build Tools
+    "adelphes.android-dev-ext",
+    "redhat.vscode-xml",
+    "redhat.vscode-yaml",
+
+    // Code Quality & Analysis
+    "usernamehw.errorlens",
+    "aaron-bond.better-comments",
+    "davidanson.vscode-markdownlint",
+
+    // Theme & Icons
+    "pkief.material-icon-theme"
   ]
 }
