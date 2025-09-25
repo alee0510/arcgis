@@ -6,5 +6,5 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'prettier/prettier': 'error',
   },
-  ignorePatterns: ['node_modules/', 'lib/', 'android/', 'ios/', 'example/'],
+  ignorePatterns: ['node_modules/', 'lib/', 'android/', 'ios/'],
 };
