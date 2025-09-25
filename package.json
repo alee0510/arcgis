@@ -7,10 +7,12 @@
     "clean:mobile:android": "find ./apps/mobile/android -name 'build' -type d -exec rm -rf {} + 2>/dev/null || true && find ./apps/mobile/android -name '.kotlin' -type d -exec rm -rf {} + 2>/dev/null || true && find ./apps/mobile/android -name '.gradle' -type d -exec rm -rf {} + 2>/dev/null || true && find ./apps/mobile/android -name '.cxx' -type d -exec rm -rf {} + 2>/dev/null || true",
     "clean:mobile:gradle": "cd apps/mobile/android && ./gradlew clean && cd ../../../",
     "clean:package:location": "pnpm --filter @arcgis/react-native-location run clean",
+    "clean:package:arcgis": "pnpm --filter @arcgis/react-native-arcgis-map run clean",
     "mobile:start:metro": "pnpm --filter @arcgis/mobile run start",
     "mobile:start:android-dev": "pnpm --filter @arcgis/mobile run android",
     "mobile:android:codegen": "cd apps/mobile/android && ./gradlew generateCodegenArtifactsFromSchema && cd ../../../",
-    "package:location:prepare": "pnpm --filter @arcgis/react-native-location run prepare"
+    "package:location:prepare": "pnpm --filter @arcgis/react-native-location run prepare",
+    "package:arcgis:prepare": "pnpm --filter @arcgis/react-native-arcgis-map run prepare"
   },
   "keywords": [
     "react-native",

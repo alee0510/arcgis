@@ -1,5 +1,5 @@
 {
-  "name": "react-native-arcgis-map",
+  "name": "@arcgis/react-native-arcgis-map",
   "version": "0.1.0",
   "description": "A Fabic Component and TurboModule package to implement native ArcGIS Map SDK for mobile application",
   "main": "./lib/module/index.js",
