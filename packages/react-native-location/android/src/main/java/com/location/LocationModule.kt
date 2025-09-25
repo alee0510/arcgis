@@ -132,9 +132,10 @@ class LocationModule(reactContext: ReactApplicationContext) : NativeLocationModu
     // Handle new intents if needed
   }
 
-  override fun onCatalystInstanceDestroy() {
+  override fun invalidate() {
     locationCallback?.let { callback ->
       fusedLocationClient.removeLocationUpdates(callback)
     }
+    context.removeActivityEventListener(this)
   }
 }
