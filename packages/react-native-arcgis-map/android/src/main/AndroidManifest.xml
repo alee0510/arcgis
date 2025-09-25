@@ -1,2 +1,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Internet permission for downloading map tiles and data -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Network state permission to check connectivity -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Location permissions for GPS and location services -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- External storage permission for offline maps and data -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- OpenGL ES version 2.0 requirement -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 </manifest>

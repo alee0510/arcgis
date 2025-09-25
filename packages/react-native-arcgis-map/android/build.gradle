@@ -33,6 +33,12 @@ android {
   defaultConfig {
     minSdkVersion getExtOrIntegerDefault("minSdkVersion")
     targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
+
+    // Enable multidex for ArcGIS SDK
+    multiDexEnabled true
+
+    // Vector drawable support
+    vectorDrawables.useSupportLibrary = true
   }
 
   buildFeatures {
@@ -42,6 +48,7 @@ android {
   buildTypes {
     release {
       minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
   }
 
@@ -50,8 +57,30 @@ android {
   }
 
   compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
+    sourceCompatibility JavaVersion.VERSION_11
+    targetCompatibility JavaVersion.VERSION_11
+  }
+
+  kotlinOptions {
+    jvmTarget = '11'
+  }
+
+  packagingOptions {
+    pickFirst '**/libc++_shared.so'
+    pickFirst '**/libjsc.so'
+    pickFirst '**/libjscexecutor.so'
+    pickFirst '**/libhermes.so'
+    pickFirst '**/libfbjni.so'
+    pickFirst '**/libfolly_json.so'
+    pickFirst '**/libglog.so'
+    pickFirst '**/libreactnativejni.so'
+
+    // Exclude conflicting files
+    exclude 'META-INF/DEPENDENCIES'
+    exclude 'META-INF/LICENSE'
+    exclude 'META-INF/LICENSE.txt'
+    exclude 'META-INF/NOTICE'
+    exclude 'META-INF/NOTICE.txt'
   }
 
   sourceSets {
@@ -67,6 +96,11 @@ android {
 repositories {
   mavenCentral()
   google()
+
+  // Esri repository for ArcGIS Maps SDK
+  maven {
+    url 'https://esri.jfrog.io/artifactory/arcgis'
+  }
 }
 
 def kotlin_version = getExtOrDefault("kotlinVersion")
@@ -74,4 +108,10 @@ def kotlin_version = getExtOrDefault("kotlinVersion")
 dependencies {
   implementation "com.facebook.react:react-android"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+  // ArcGIS Maps SDK for Kotlin 200.x
+  implementation 'com.esri:arcgis-maps-kotlin:200.6.0'
+
+  // Multidex support for large APKs
+  implementation 'androidx.multidex:multidex:2.0.1'
 }
