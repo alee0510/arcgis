@@ -10,9 +10,6 @@ importers:
 
   apps/mobile:
     dependencies:
-      '@arcgis/react-native-arcgis-map':
-        specifier: workspace:*
-        version: link:../../packages/react-native-arcgis-map
       '@arcgis/react-native-location':
         specifier: workspace:*
         version: link:../../packages/react-native-location
@@ -252,10 +249,6 @@ importers:
       typescript:
         specifier: ^5.9.2
         version: 5.9.2
-
-  packages/react-native-location/lib/module: {}
-
-  packages/react-native-location/lib/typescript: {}
 
 packages:
 
@@ -7314,9 +7307,7 @@ snapshots:
       metro-runtime: 0.82.5
     transitivePeerDependencies:
       - '@babel/core'
-      - bufferutil
       - supports-color
-      - utf-8-validate
 
   '@react-native/normalize-colors@0.79.6': {}
 

@@ -9,8 +9,9 @@ buildscript {
       switch(name) {
         case 'compileSdkVersion': return 35
         case 'targetSdkVersion': return 35
-        case 'minSdkVersion': return 24
+        case 'minSdkVersion': return 26
         case 'buildToolsVersion': return '35.0.0'
+        case 'ndkVersion': return '27.1.12297006'
         case 'kotlinVersion': return '2.0.21'
         default: return null
       }
@@ -45,7 +46,7 @@ def getExtOrIntegerDefault(name) {
     switch(name) {
       case 'compileSdkVersion': return 35
       case 'targetSdkVersion': return 35
-      case 'minSdkVersion': return 24
+      case 'minSdkVersion': return 26
       default: return 35 // Default fallback
     }
   }
@@ -54,6 +55,8 @@ def getExtOrIntegerDefault(name) {
 android {
   namespace "com.location"
 
+  ndkVersion getExtOrDefault("ndkVersion")
+  buildToolsVersion getExtOrDefault("buildToolsVersion")
   compileSdkVersion getExtOrIntegerDefault("compileSdkVersion")
 
   defaultConfig {
@@ -88,8 +91,8 @@ android {
   sourceSets {
     main {
       java.srcDirs += [
-        "generated/java",
-        "generated/jni"
+        "build/generated/source/codegen/java",
+        "build/generated/source/codegen/jni"
       ]
     }
   }
