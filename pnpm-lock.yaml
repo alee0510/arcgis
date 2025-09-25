@@ -10,6 +10,9 @@ importers:
 
   apps/mobile:
     dependencies:
+      '@arcgis/react-native-arcgis-map':
+        specifier: workspace:*
+        version: link:../../packages/react-native-arcgis-map
       '@arcgis/react-native-location':
         specifier: workspace:*
         version: link:../../packages/react-native-location
