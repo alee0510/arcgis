@@ -24,8 +24,8 @@ export class ArcgisMap {
     return ArcgisMapModule.init(key);
   }
 
-  static async creates(basemapStyle: BaseMapStyle): Promise<string> {
-    return ArcgisMapModule.creates(basemapStyle);
+  static async create(basemapStyle: BaseMapStyle): Promise<string> {
+    return ArcgisMapModule.create(basemapStyle);
   }
 
   static async dispose(mapId: string): Promise<string> {
@@ -50,4 +50,4 @@ export class ArcgisMap {
 export default ArcgisMap;
 export { default as ArcgisMapView } from './ArcgisMapViewNativeComponent';
 export * from './ArcgisMapViewNativeComponent';
-export type { BaseMapStyle, Viewpoint };
+export type { BaseMapStyle, Viewpoint } from './NativeArcgisMapModule';

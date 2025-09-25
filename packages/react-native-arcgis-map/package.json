@@ -35,8 +35,9 @@
     "test": "jest",
     "typecheck": "tsc",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "clean": "del-cli android/build lib",
+    "clean": "del-cli android/build lib ios/generated",
     "prepare": "bob build",
+    "codegen": "bob build --target codegen",
     "release": "release-it --only-version"
   },
   "keywords": [
@@ -137,11 +138,12 @@
         {
           "project": "tsconfig.build.json"
         }
-      ]
+      ],
+      "codegen"
     ]
   },
   "codegenConfig": {
-    "name": "ArcgisMapViewSpec",
+    "name": "ArcgisMapSpec",
     "type": "all",
     "jsSrcsDir": "src",
     "android": {
@@ -151,7 +153,12 @@
       "componentProvider": {
         "ArcgisMapView": "ArcgisMapView"
       }
-    }
+    },
+    "outputDir": {
+      "ios": "ios/generated",
+      "android": "android/build/generated/source/codegen"
+    },
+    "includesGeneratedCode": true
   },
   "create-react-native-library": {
     "languages": "kotlin-objc",
