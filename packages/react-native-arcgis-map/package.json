@@ -147,7 +147,7 @@
     "type": "all",
     "jsSrcsDir": "src",
     "android": {
-      "javaPackageName": "com.arcgismap"
+      "javaPackageName": "com.arcgismapspec"
     },
     "ios": {
       "componentProvider": {

@@ -35,8 +35,9 @@
     "test": "jest",
     "typecheck": "tsc",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "clean": "del-cli android/build lib",
+    "clean": "del-cli android/build lib ios/generated",
     "prepare": "bob build",
+    "codegen": "bob build --target codegen",
     "release": "release-it --only-version"
   },
   "keywords": [
