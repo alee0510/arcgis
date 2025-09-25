@@ -35,6 +35,23 @@ class ArcgisMapViewManager(context: ReactApplicationContext) : SimpleViewManager
     view.mapId = value
   }
 
+  override fun getExportedCustomBubblingEventTypeConstants(): Map<String?, Any?>? {
+    return mapOf(
+      "onReady" to mapOf(
+        "phasedRegistrationNames" to mapOf(
+          "bubbled" to "onReady",
+          "captured" to "onReadyCapture"
+        )
+      ),
+      "onError" to mapOf(
+        "phasedRegistrationNames" to mapOf(
+          "bubbled" to "onError",
+          "captured" to "onErrorCapture"
+        )
+      )
+    )
+  }
+
   companion object {
     const val NAME = "ArcgisMapView"
   }
