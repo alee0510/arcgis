@@ -9,6 +9,7 @@
     "clean:mobile:gradle": "cd apps/mobile/android && ./gradlew clean && cd ../../../",
     "clean:package:location": "pnpm --filter @arcgis/react-native-location run clean",
     "clean:package:arcgis": "pnpm --filter @arcgis/react-native-arcgis-map run clean",
+    "clean:packages": "pnpm run clean:package:location && pnpm run clean:package:arcgis",
     "mobile:start:metro": "pnpm --filter @arcgis/mobile run start",
     "mobile:start:android-dev": "pnpm --filter @arcgis/mobile run android",
     "mobile:android:codegen": "cd apps/mobile/android && ./gradlew generateCodegenArtifactsFromSchema && cd ../../../",
@@ -16,8 +17,8 @@
     "package:location:codegen": "pnpm --filter @arcgis/react-native-location run codegen",
     "package:arcgis:prepare": "pnpm --filter @arcgis/react-native-arcgis-map run prepare",
     "package:arcgis:codegen": "pnpm --filter @arcgis/react-native-arcgis-map run codegen",
-    "package:prepare": "pnpm run package:location:prepare && pnpm run package:arcgis:prepare",
-    "package:codegen": "pnpm run package:location:codegen && pnpm run package:arcgis:codegen"
+    "packages:prepare": "pnpm run package:location:prepare && pnpm run package:arcgis:prepare",
+    "packages:codegen": "pnpm run package:location:codegen && pnpm run package:arcgis:codegen"
   },
   "keywords": [
     "react-native",
