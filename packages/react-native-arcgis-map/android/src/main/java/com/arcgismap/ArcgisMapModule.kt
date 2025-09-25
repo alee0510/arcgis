@@ -43,7 +43,7 @@ class ArcgisMapModule(reactContext: ReactApplicationContext) : NativeArcgisMapMo
       val mapId = java.util.UUID.randomUUID().toString()
       map.maxScale = 1000.0 // Set maxScale to 1:1000, which is a very zoomed-in view
       map.minScale = 100000000.0 // Set minScale to 1:100,000,000, which is a very zoomed-out view
-      Companion.setMap(mapId, map)
+      setMap(mapId, map)
 
       val result = Arguments.createMap()
       result.putString("mapId", mapId)
@@ -61,13 +61,13 @@ class ArcgisMapModule(reactContext: ReactApplicationContext) : NativeArcgisMapMo
         return
       }
 
-      val map = Companion.getMap(mapId)
+      val map = getMap(mapId)
       if (map == null) {
         promise?.reject("MAP_NOT_FOUND", "No map found with the provided ID")
         return
       }
 
-      Companion.removeMap(mapId)
+      removeMap(mapId)
       promise?.resolve("Map disposed successfully.")
     } catch (e: Exception) {
       promise?.reject("DISPOSAL_ERROR", e)
@@ -87,7 +87,7 @@ class ArcgisMapModule(reactContext: ReactApplicationContext) : NativeArcgisMapMo
         return
       }
 
-      val map = Companion.getMap(mapId)
+      val map = getMap(mapId)
       if (map == null) {
         promise?.reject("MAP_NOT_FOUND", "No map found with the provided ID")
         return
@@ -121,14 +121,14 @@ class ArcgisMapModule(reactContext: ReactApplicationContext) : NativeArcgisMapMo
         return
       }
 
-      val map = Companion.getMap(mapId)
+      val map = getMap(mapId)
       if (map == null) {
         promise?.reject("MAP_NOT_FOUND", "No map found with the provided ID")
         return
       }
 
       val style = getBaseMapStyles(basemapStyle)
-      Companion.setMap(mapId, ArcGISMap(style))
+      setMap(mapId, ArcGISMap(style))
       promise?.resolve("Basemap style set successfully.")
 
     } catch (e: Exception) {
@@ -166,7 +166,7 @@ class ArcgisMapModule(reactContext: ReactApplicationContext) : NativeArcgisMapMo
     return style != null && validStyles.contains(style)
   }
 
-  object Companion {
+  companion object {
     private val maps = ConcurrentHashMap<String, ArcGISMap>()
     fun getMap(id: String): ArcGISMap? = maps[id]
     fun setMap(id: String, map: ArcGISMap) { maps[id] = map }
