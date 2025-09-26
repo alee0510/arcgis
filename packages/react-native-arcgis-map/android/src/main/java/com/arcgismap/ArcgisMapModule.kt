@@ -9,7 +9,6 @@ import com.arcgismaps.mapping.Viewpoint
 import com.arcgismapspec.NativeArcgisMapModuleSpec
 import java.util.concurrent.ConcurrentHashMap
 
-
 class ArcgisMapModule(reactContext: ReactApplicationContext) : NativeArcgisMapModuleSpec(reactContext) {
   @ReactMethod
   override fun initialize(apiKey: String, promise: Promise) {
@@ -26,8 +25,18 @@ class ArcgisMapModule(reactContext: ReactApplicationContext) : NativeArcgisMapMo
   }
 
   @ReactMethod
-  override fun createMap(basemapStyle: String?, promise: Promise?) {
+  override fun createMap(mapId: String?, basemapStyle: String?, promise: Promise?) {
     try {
+      if (mapId == null || mapId.isEmpty()) {
+        promise?.reject("INVALID_MAP_ID", "Map ID cannot be null or empty")
+        return
+      }
+
+      if (getMap(mapId) != null) {
+        promise?.reject("DUPLICATE_MAP_ID", "A map with the provided ID already exists")
+        return
+      }
+
       if (basemapStyle == null) {
         promise?.reject("INVALID_BASEMAP_STYLE", "Unrecognized or null basemap style: $basemapStyle")
         return
@@ -40,14 +49,10 @@ class ArcgisMapModule(reactContext: ReactApplicationContext) : NativeArcgisMapMo
 
       val style = getBaseMapStyles(basemapStyle)
       val map = ArcGISMap(style)
-      val mapId = java.util.UUID.randomUUID().toString()
       map.maxScale = 1000.0 // Set maxScale to 1:1000, which is a very zoomed-in view
       map.minScale = 100000000.0 // Set minScale to 1:100,000,000, which is a very zoomed-out view
       setMap(mapId, map)
-
-      val result = Arguments.createMap()
-      result.putString("mapId", mapId)
-      promise?.resolve(result)
+      promise?.resolve("Map created successfully.")
     } catch (e: Exception) {
       promise?.reject("MAP_CREATION_ERROR", e)
     }
