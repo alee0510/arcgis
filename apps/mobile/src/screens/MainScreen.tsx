@@ -2,8 +2,11 @@ import {useEffect, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Text, MD2Colors} from 'react-native-paper';
 import {Location} from '@arcgis/react-native-location';
+import {ArcgisMap, ArcgisMapView} from '@arcgis/react-native-arcgis-map';
 import type {LocationResult} from '@arcgis/react-native-location';
 
+console.log('ArcgisMap:', ArcgisMap);
+console.log('ArcgisMapView:', ArcgisMapView);
 export default function MainScreen() {
   const [location, setLocation] = useState<LocationResult | null>(null);
 
