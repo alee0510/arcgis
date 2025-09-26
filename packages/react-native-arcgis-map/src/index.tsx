@@ -24,8 +24,11 @@ export class ArcgisMap {
     return ArcgisMapModule.initialize(key);
   }
 
-  static async create(basemapStyle: BaseMapStyle): Promise<string> {
-    return ArcgisMapModule.createMap(basemapStyle);
+  static async create(
+    mapId: string,
+    basemapStyle: BaseMapStyle
+  ): Promise<string> {
+    return ArcgisMapModule.createMap(mapId, basemapStyle);
   }
 
   static async dispose(mapId: string): Promise<string> {
