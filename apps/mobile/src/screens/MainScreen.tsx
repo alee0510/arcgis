@@ -4,6 +4,7 @@ import {Text, MD2Colors} from 'react-native-paper';
 import {Location} from '@arcgis/react-native-location';
 import {ArcgisMap, ArcgisMapView} from '@arcgis/react-native-arcgis-map';
 import type {LocationResult} from '@arcgis/react-native-location';
+import {env} from '@mobile/env';
 
 console.log('ArcgisMap:', ArcgisMap);
 console.log('ArcgisMapView:', ArcgisMapView);
@@ -18,6 +19,7 @@ export default function MainScreen() {
         const loc = await Location.getCurrentLocation();
         console.log('Current location:', loc);
         setLocation(loc);
+        await ArcgisMap.init(env.ARCGIS_API_KEY);
       } else {
         console.log('Location permission denied');
       }
