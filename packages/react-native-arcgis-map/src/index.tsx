@@ -21,15 +21,15 @@ if (!ArcgisMapModule) {
 
 export class ArcgisMap {
   static async init(key: string): Promise<string> {
-    return ArcgisMapModule.init(key);
+    return ArcgisMapModule.initialize(key);
   }
 
   static async create(basemapStyle: BaseMapStyle): Promise<string> {
-    return ArcgisMapModule.create(basemapStyle);
+    return ArcgisMapModule.createMap(basemapStyle);
   }
 
   static async dispose(mapId: string): Promise<string> {
-    return ArcgisMapModule.dispose(mapId);
+    return ArcgisMapModule.disposeMap(mapId);
   }
 
   static async setViewpoint(
@@ -39,11 +39,11 @@ export class ArcgisMap {
     return ArcgisMapModule.setViewpoint(mapId, viewpoint);
   }
 
-  static async setBasemap(
+  static async setBasemapStyle(
     mapId: string,
     basemapStyle: BaseMapStyle
   ): Promise<string> {
-    return ArcgisMapModule.setBasemap(mapId, basemapStyle);
+    return ArcgisMapModule.setBasemapStyle(mapId, basemapStyle);
   }
 }
 
