@@ -5,11 +5,11 @@ import android.widget.FrameLayout
 import android.util.Log
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.UIManagerHelper
-import com.arcgismaps.mapping.view.MapView
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.bridge.Arguments
+import com.arcgismaps.mapping.view.MapView
 
-class ArcgisMapView(context: Context): FrameLayout(context)  {
+class ArcgisMapView(context: Context): FrameLayout(context) {
     private var mapView: MapView = MapView(context)
     var mapId: String? = null
       set(value) {
@@ -69,5 +69,16 @@ class ArcgisMapView(context: Context): FrameLayout(context)  {
 
     fun getMapView(): MapView {
         return mapView
+    }
+
+    override fun onDetachedFromWindow() {
+      super.onDetachedFromWindow()
+      try {
+        ArcgisMapModule.removeMap(mapId ?: "")
+        removeView(mapView)
+      } catch (e: Exception) {
+        Log.e("ArcgisMapView", "Error during cleanup: ${e.message}")
+      }
+      Log.d("ArcgisMapView", "MapView cleaned up on unmount.")
     }
 }
