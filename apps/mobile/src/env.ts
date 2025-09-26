@@ -3,6 +3,7 @@ import {
   API_TIMEOUT,
   APP_NAME,
   APP_VERSION,
+  ARCGIS_API_KEY,
   DEBUG_MODE,
   NODE_ENV,
 } from '@env';
@@ -18,6 +19,7 @@ export const EnvSchema = z.object({
     }),
   APP_NAME: z.string().min(1),
   APP_VERSION: z.string().min(1),
+  ARCGIS_API_KEY: z.string().min(1),
   DEBUG_MODE: z.string().transform(val => val === 'true' || val === '1'),
   NODE_ENV: z.enum(['development', 'production', 'test']),
 });
@@ -27,6 +29,7 @@ export const env = EnvSchema.parse({
   API_TIMEOUT,
   APP_NAME,
   APP_VERSION,
+  ARCGIS_API_KEY,
   DEBUG_MODE,
   NODE_ENV,
 });
