@@ -54,11 +54,13 @@ export default function MainScreen() {
   }, []);
 
   console.log('Rendering MainScreen with location:', location);
+  console.log('API Key:', env.ARCGIS_API_KEY);
   return (
     <View style={styles.container}>
       {mapReady && location ? (
         <ArcgisMapView
           mapId={MAP_ID}
+          style={styles.map}
           onError={e => console.error('ArcgisMapView error:', e.nativeEvent)}
           onReady={e => console.log('ArcgisMapView ready:', e.nativeEvent)}
         />
@@ -73,5 +75,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: MD2Colors.white,
+    position: 'relative',
+  },
+  map: {
+    height: 300,
+    width: 300,
+    top: 0,
+    left: 0,
+    backgroundColor: MD2Colors.blue50,
+    zIndex: 100,
   },
 });
