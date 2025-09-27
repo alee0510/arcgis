@@ -1,6 +1,9 @@
 package com.arcgismap
 
+import android.util.Log
 import com.facebook.react.bridge.*
+import com.arcgismaps.ApiKey
+import com.arcgismaps.ArcGISEnvironment
 import com.arcgismaps.mapping.ArcGISMap
 import com.arcgismaps.mapping.BasemapStyle
 import com.arcgismaps.mapping.Viewpoint
@@ -160,5 +163,16 @@ class ArcgisMapModule(reactContext: ReactApplicationContext) : NativeArcgisMapMo
     fun getMap(id: String): ArcGISMap? = maps[id]
     fun setMap(id: String, map: ArcGISMap) { maps[id] = map }
     fun removeMap(id: String) { maps.remove(id) }
+
+    @JvmStatic
+    fun setApiKey(apiKey: String) {
+      if (apiKey.isNotEmpty()) {
+        ApiKey.create(apiKey)
+        ArcGISEnvironment.apiKey = ApiKey.create(apiKey)
+        Log.d("ArcgisMapModule", "API Key set successfully.")
+      } else {
+        Log.d("ArcgisMapModule", "API Key is empty. Please provide a valid API Key.")
+      }
+    }
   }
 }

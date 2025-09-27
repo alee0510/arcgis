@@ -11,6 +11,7 @@ import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.soloader.OpenSourceMergedSoMapping
 import com.facebook.soloader.SoLoader
+import com.arcgismap.ArcgisMapModule
 
 class MainApplication : Application(), ReactApplication {
 
@@ -39,6 +40,14 @@ class MainApplication : Application(), ReactApplication {
     if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
       // If you opted-in for the New Architecture, we load the native entry point for this app.
       load()
+    }
+
+    // Initialize the ArcGIS Maps SDK with your API key
+    try {
+      val apiKey = BuildConfig.ARCGIS_API_KEY
+      ArcgisMapModule.setApiKey(apiKey)
+    } catch (e: Exception) {
+      e.printStackTrace()
     }
   }
 }
