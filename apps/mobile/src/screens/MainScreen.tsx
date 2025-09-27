@@ -20,8 +20,7 @@ export default function MainScreen() {
         const loc = await Location.getCurrentLocation();
         console.log('Current location:', loc);
         setLocation(loc);
-        const initResult = await ArcgisMap.init(env.ARCGIS_API_KEY);
-        const createResult = await ArcgisMap.create(
+        const createResult = await ArcgisMap.createMap(
           MAP_ID,
           'arcGISTopographic',
         );
@@ -32,7 +31,6 @@ export default function MainScreen() {
         });
         console.log(
           'ArcGIS Map initialized:',
-          initResult,
           createResult,
           setViewpointResult,
         );
@@ -49,7 +47,7 @@ export default function MainScreen() {
     requestLocationPermission();
 
     return () => {
-      ArcgisMap.dispose(MAP_ID);
+      ArcgisMap.disposeMap(MAP_ID);
     };
   }, []);
 
@@ -74,15 +72,11 @@ export default function MainScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: MD2Colors.white,
-    position: 'relative',
+    // backgroundColor: MD2Colors.white,
   },
   map: {
-    height: 300,
-    width: 300,
-    top: 0,
-    left: 0,
-    backgroundColor: MD2Colors.blue50,
-    zIndex: 100,
+    flex: 1,
+    height: '100%',
+    width: '100%',
   },
 });
