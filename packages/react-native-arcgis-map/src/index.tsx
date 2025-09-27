@@ -20,18 +20,14 @@ if (!ArcgisMapModule) {
 }
 
 export class ArcgisMap {
-  static async init(key: string): Promise<string> {
-    return ArcgisMapModule.initialize(key);
-  }
-
-  static async create(
+  static async createMap(
     mapId: string,
     basemapStyle: BaseMapStyle
   ): Promise<string> {
     return ArcgisMapModule.createMap(mapId, basemapStyle);
   }
 
-  static async dispose(mapId: string): Promise<string> {
+  static async disposeMap(mapId: string): Promise<string> {
     return ArcgisMapModule.disposeMap(mapId);
   }
 

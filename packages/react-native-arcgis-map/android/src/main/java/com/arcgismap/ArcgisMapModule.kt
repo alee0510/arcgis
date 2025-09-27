@@ -1,8 +1,6 @@
 package com.arcgismap
 
 import com.facebook.react.bridge.*
-import com.arcgismaps.ApiKey
-import com.arcgismaps.ArcGISEnvironment
 import com.arcgismaps.mapping.ArcGISMap
 import com.arcgismaps.mapping.BasemapStyle
 import com.arcgismaps.mapping.Viewpoint
@@ -10,20 +8,6 @@ import com.arcgismapspec.NativeArcgisMapModuleSpec
 import java.util.concurrent.ConcurrentHashMap
 
 class ArcgisMapModule(reactContext: ReactApplicationContext) : NativeArcgisMapModuleSpec(reactContext) {
-  @ReactMethod
-  override fun initialize(apiKey: String, promise: Promise) {
-    try {
-      if (apiKey.isEmpty()) {
-        promise.reject("INVALID_API_KEY", "API key cannot be empty")
-        return
-      }
-      ArcGISEnvironment.apiKey = ApiKey.create(apiKey)
-      promise.resolve("ArcGIS environment initialized successfully.")
-    } catch (e: Exception) {
-      promise.reject("INITIALIZATION_ERROR", e)
-    }
-  }
-
   @ReactMethod
   override fun createMap(mapId: String?, basemapStyle: String?, promise: Promise?) {
     try {

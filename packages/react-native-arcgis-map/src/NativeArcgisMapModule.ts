@@ -20,7 +20,6 @@ export type Viewpoint = {
 };
 
 export interface Spec extends TurboModule {
-  initialize(key: string): Promise<string>;
   createMap(
     mapId: string,
     basemapStyle: BaseMapStyle
